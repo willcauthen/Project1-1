@@ -30,11 +30,21 @@ app.get('/',function (req, res){
 			db.Advice.find().populate("keywords").exec(function (error , advicesFound) {
 						for (var i=0; i< advicesFound.length;i++){
 							if ( advicesFound[i].keywords[0].content ==="general") {
-								//console.log("the advice is : ", advicesFound[i])
 								advices.push(advicesFound[i]);
 							}
 						}
-						console.log(advices);
+						res.render('index' ,{advices : advices});
+			});
+		}else if(req.session.user){
+			var record = req.session.user.medicalRecord;
+			var l = record.length;
+			var random = Math.floor((Math.random() * (l)) + 1);
+			db.Advice.find().populate("keywords").exec(function (error , advicesFound) {
+						for (var i=0; i< advicesFound.length;i++){
+							if ( advicesFound[i].keywords[0].content.toLowerCase() === record[random].toLowerCase() ) {
+								advices.push(advicesFound[i]);
+							}
+						}
 						res.render('index' ,{advices : advices});
 			});
 		}
@@ -46,18 +56,30 @@ app.get('/searchPage', function (req, res) {
 
 app.post('/search', function (req, finalres){
 	var input = req.body;
+	console.log('the input', input);
 	var advices=[];
 	//console.log("the search word is", input);
 	db.Advice.find().populate('keywords').exec(function (error, res){
 			//console.log('2- the keyword found', res);
 			for (var i=0; i< res.length;i++){
-				if (res[i].keywords[0].content === input.search){
+				if (res[i].keywords[0].content === input.search.toLowerCase()){
 					advices.push(res[i]);
 				}
 			}
 			finalres.json(advices);
 	});	
 });
+
+app.get('/postShow/:id', function (req , res) {
+	var id= req.params.id;
+	console.log('the id selected is :', id)
+	db.Advice.findById({_id: id}, function (error , result) {
+		if(error) {
+			console.log('error', error);
+		}
+		res.json(result);
+	})
+})
 
 //Signing up :
 app.post('/users', function (req, res) {

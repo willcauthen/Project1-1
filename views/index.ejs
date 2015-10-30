@@ -70,7 +70,6 @@
           <ul class="nav navbar-nav navbar-right" id="ulNav">
             <li><a href="#tf-home" class="page-scroll">Home</a></li>
             <li><a href="#tf-about" class="page-scroll">About</a></li>
-            <li><a href="#tf-services" class="page-scroll">Services</a></li>
             <li><a href="#tf-works" class="page-scroll">Search</a></li>
             <li><a href="#tf-contact" class="page-scroll">Contact</a></li>
             <li class ='signButton'><a  class="page-scroll" id='signButton'>Sign In</a></li>
@@ -192,48 +191,6 @@
         </div>
     </div>
 
-
-    <!-- Services Section
-    ==========================================-->
-    <div id="tf-services" class="text-center">
-        <div class="container">
-            <div class="section-title center">
-                <h2>Take a look at <strong>our services</strong></h2>
-                <div class="line">
-                    <hr>
-                </div>
-                <div class="clearfix"></div>
-                <small><em>Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</em></small>
-            </div>
-            <div class="space"></div>
-            <div class="row">
-                <div class="col-md-3 col-sm-6 service">
-                    <i class="fa fa-stethoscope"></i>
-                    <h4><a href='#tf-works'><strong>Advice Searching</strong></a></h4>
-                    <p> If you need an advice, a home remedy, just type a keyword and we will help you in the search page </p>
-                </div>
-
-                <div class="col-md-3 col-sm-6 service">
-                    <i class="fa fa-user-md"></i>
-                    <h4><a href='#'><strong>Direct communication</strong></a></h4>
-                    <p>You can contact one of our doctors or pharmacist any time, available 24/7</p>
-                </div>
-
-                <div class="col-md-3 col-sm-6 service">
-                    <i class="fa fa-hospital-o"></i>
-                    <h4><a href='#'><strong>Closest care center</strong></a></h4>
-                    <p>We propose a service that allow you to find the closest care center to your location</p>
-                </div>
-
-                <div class="col-md-3 col-sm-6 service">
-                    <i class="fa fa-bullhorn"></i>
-                    <h4><a href='#'><strong>Other</strong></a></h4>
-                    <p>soming soon</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Search Section
     ==========================================-->
     <div id="tf-works">
@@ -260,15 +217,52 @@
             <div class="categories">
                 
                 <ul class="cat">
-                    <li class="pull-left"><h4>Filter by Type:</h4></li>
+                    <li class="pull-left"><h4>See here for available keywords</h4></li>
                     <li class="pull-right">
-                        <ol class="type">
-                            <li><a href="#" data-filter="*" class="active">All</a></li>
-                            <li><a href="#" data-filter=".web">Web Design</a></li>
-                            <li><a href="#" data-filter=".photography">Photography</a></li>
-                            <li><a href="#" data-filter=".app" >Mobile App</a></li>
-                            <li><a href="#" data-filter=".branding" >Branding</a></li>
-                        </ol>
+                    <select name="" id="input" class="form-control">
+                        <option value="">See keywords here</option>
+                        <option value="">Abrasion</option>
+                        <option value="">Acidity</option>
+                        <option value="">Acne</option>
+                        <option value="">Alcoholism</option>
+                        <option value="">Allergies</option>
+                        <option value="">Amnesia</option>
+                        <option value="">Anemia</option>
+                        <option value="">Angina</option>
+                        <option value="">Anorexia</option>
+                        <option value="">Appendicitis</option>
+                        <option value="">Arthritis</option>
+                        <option value="">Arteriosclerosis</option>
+                        <option value="">Asthma</option>
+                        <option value="">Athlete's Foot</option>
+                        <option value="">Backacke</option>
+                        <option value="">Bad Breath</option>
+                        <option value="">Baldness</option>
+                        <option value="">Bed sores</option>
+                        <option value="">BedWetting</option>
+                        <option value="">Belching</option>
+                        <option value="">Blackheads</option>
+                        <option value="">Body odor</option>
+                        <option value="">Body rash</option>
+                        <option value="">Boils</option>
+                        <option value="">Bone spurs</option>
+                        <option value="">Bronchitis</option>
+                        <option value="">Bruises</option>
+                        <option value="">Burning tongue</option>
+                        <option value="">Burns</option>
+                        <option value="">Bursitis</option>
+                        <option value="">Canker sores</option>
+                        <option value="">Carpal Tunel Syndrome</option>
+                        <option value="">Cataract</option>
+                        <option value="">Chafing</option>
+                        <option value="">Cholesterol</option>
+                        <option value="">Chicken Pox</option>
+                        <option value="">Cholera</option>
+                        <option value="">Cirrhosis</option>
+                        <option value="">Cold sores</option>
+                        <option value="">Common cold</option>
+                        <option value="">Common fever</option>
+                    </select>
                     </li>
                 </ul>
                 <div class="clearfix"></div>
@@ -277,14 +271,14 @@
             <div id="lightbox" class="row">
                 <% for (var i=0; i < advices.length; i++) { %>
                     <div class="col-sm-6 col-md-3 col-lg-3 ">
-                        <div class="portfolio-item">
-                            <div class="hover-bg">
+                        <div class="portfolio-item " id="<%=advices[i]._id%>">
+                            <div class="hover-bg" id="<%=advices[i]._id%>">
                                 <a href="#" >
                                     <div class="hover-text">
                                         <h4><%=advices[i].title%></h4>
                                         <small><%=advices[i].keywords.content%></small>
                                         <div class="clearfix"></div>
-                                        <i class="fa fa-plus" href="<%=advices[i].link%>" target="_blank"></i>
+                                        <i class="fa fa-plus searchPlus" id="<%=advices[i]._id%>" href="<%=advices[i].link%>" target="_blank"></i>
                                     </div>
                                     <img src="<%=advices[i].img%>" class="img-responsive" alt="...">
                                 </a>
@@ -299,28 +293,28 @@
     <!-- Unique page view
     =========================================-->
        <!-- Profile form -->
-    <div class="form2" id="tf-result"  >
+    <div class="form2" id="tf-result" style="display:none"  >
         <a class="boxclose" id="boxclose3"></a> 
         <ul class="tab-group">
-            <li class="tab active"><a style=" width : 100%">Title</a></li>
+            <li class="tab active"><a style=" width : 100%">Our Advice for you</a></li>
         </ul>
-            <div id="signup">   
+            <div>   
                 <h1></h1>  
             </div>
             <div class="container">
                 <div class ="row">
                     <div class ="col-md-6">
-                         <img src="" class="img-responsive">
+                         <img src="" id="adviceImg" class="img-responsive">
                     </div>
                     <div class="col-md-6">
                         <div class="about-text">
                             <div class="section-title">
-                                <h4 style="color: #ffffff">keyword</h4>
-                                <h2 style="color: #ffffff">home <strong>remedy</strong></h2>
+                                <h4 style="color: #ffffff" id='H4'></h4>
+                                <h2 style="color: #ffffff" id='H2'>home <strong id="strong">remedy</strong></h2>
                                 <hr>
                                 <div class="clearfix"></div>
                             </div>
-                            <p class="content" style="color: #ffffff">Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
+                            <p class="intro" style="color: #ffffff ; margin-right:60px"></p>
                             
                         </div>
                     </div>
@@ -404,6 +398,7 @@
     <script type="text/javascript" src="/static/js/bootstrap.js"></script>
     <script type="text/javascript" src="/static/js/SmoothScroll.js"></script>
     <script type="text/javascript" src="/static/js/jquery.isotope.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.validate.js"></script>
 
     <script src="/static/js/owl.carousel.js"></script>
      <script src="/static/dist/sweetalert.min.js"></script>
