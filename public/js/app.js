@@ -285,10 +285,11 @@ function pageLoad(){
 			if(data.user){
 				uderId= data.user._id;
 				console.log("the check auth , the user id is : ", data.user._id);
+				console.log("the check auth , the user email is : ", data.user.email);
 				$('#signButton').remove();
 				$('.signButton').remove();
 				$('#ulNav').append('<li class="dropdown" id="'+data.user._id +'"><a href="#" class="page-scroll dropdown-toggle" data-toggle="dropdown">'+data.user.firstName+'<span class="caret"></span></a><ul class="dropdown-menu" role="menu"><li><a  id ="profileButton" href="/profile/'+ data.user.firstName +'">Profile</a></li><li class="divider"></li><li><a id="logOut" href="#">Log out</a></li></ul></li>')
-				
+				$('#InputEmail').val(data.user.email);
 			}/*else if (data.user === undefined) {
 				console.log('out of session');
 				window.location.href="/";
@@ -363,4 +364,18 @@ function pageLoad(){
     	$('.dropdown-menu', this).not('.in .dropdown-menu').stop( true, true ).slideUp("fast");
         $(this).toggleClass('open'); 
 	});
+
+	//Sending email :
+	$('.sendingForm').on('submit', function () {
+		
+			var email = $('#InputEmail').val();
+			var text  = $('#textArea').val();
+		
+		$.get('/send', {email:email, text : text} , function (response) {
+			console.log(response);
+			if (response ==='sent') {
+				swal("Message sent!", "Your message is sent", "success");
+			}
+		})
+	})
 }

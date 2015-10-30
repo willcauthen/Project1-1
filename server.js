@@ -7,7 +7,9 @@ var express = require("express"),
     bodyParser = require("body-parser"),
 	mongoose = require("mongoose"),
     db = require('./models'),
-    session = require('express-session');
+    session = require('express-session'),
+    
+    nodemailer = require("nodemailer");
 
 // CONFIG //
 // set ejs as view engine
@@ -19,9 +21,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
   saveUninitialized: true,
   resave: true,
-  secret: 'OurSuperSecretCookieSecret',
+  secret: 'SuperMegaGegaCookieSecret',
   cookie: { maxAge: 600000 }
 }));
+
+require('dotenv').load();
+var email = process.env.Mail;
+var pass = process.env.pass;
+var smtpTransport = nodemailer.createTransport("SMTP",{
+service: "Gmail",
+auth: {
+user: email,
+pass: pass
+}
+});
 
 // 
 app.get('/',function (req, res){
@@ -187,6 +200,27 @@ app.get("/" , function (req , res) {
 	
 })
 
-app.listen(4000, function (){
-  console.log("listening on port 4000 ... success :)");
+app.get('/send', function (req, res) {
+	var mailOptions = {
+		from: 'racha@womenwhocode.com',
+		to: 'br_bia@esi.dz',
+		text: req.query.text
+	}
+	console.log(mailOptions);
+	smtpTransport.sendMail(mailOptions, function (error, response) {
+		if (error) {
+			console.log("error :", error);
+		} else {
+			console.log("message sent :", response.response);
+			res.send('sent');
+		}
+	});
 });
+
+app.listen(process.env.PORT || 3000, function () {
+	console.log("listening on port 3000 ... success :)");
+})
+
+/*app.listen(4000, function (){
+  console.log("listening on port 4000 ... success :)");
+});*/
