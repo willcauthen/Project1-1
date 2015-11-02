@@ -51,7 +51,7 @@ app.get('/',function (req, res){
 		}else if(req.session.user){
 			var record = req.session.user.medicalRecord;
 			var l = record.length;
-			var random = Math.floor((Math.random() * (l)) + 1);
+			var random = Math.floor((Math.random() * (l)));
 			db.Advice.find().populate("keywords").exec(function (error , advicesFound) {
 						for (var i=0; i< advicesFound.length;i++){
 							if ( advicesFound[i].keywords[0].content.toLowerCase() === record[random].toLowerCase() ) {
@@ -109,14 +109,12 @@ app.post('/users', function (req, res) {
 		} 
 		req.session.userId = newUser._id;
 		req.session.user = newUser;
-		//console.log('the session id is :', req.session.userId )
 		res.send(newUser);
 	} )
 });
 
 //log out :
 app.post('/logout', function (req , res) {
-	//console.log("the result is ", result);
 	req.session.user = null;
 	req.session.userId=null;
 	res.json(req.session.user);

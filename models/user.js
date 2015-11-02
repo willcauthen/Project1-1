@@ -57,8 +57,6 @@ userSchema.statics.updatePasswordSecure = function ( id ,password , callback) {
 userSchema.statics.authenticate = function (password, email, callback) {
     // find user by email entered at log in
     this.findOne({email: email}, function (err, user) {
-     // console.log(user);
-
       // throw error if can't find user
       if (!user) {
         console.log('No user with email ' + email);

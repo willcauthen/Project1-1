@@ -139,7 +139,7 @@ function pageLoad(){
 			$.post('/users', $('#signupForm').serialize(), function (response) {
 			console.log('the serialize is', $('.form').serialize() )
 			console.log('congrats new User : ', response);
-			$('#signButton').remove();
+			$('.signButton').hide();
 			$('#ulNav').append('<li class="dropdown" id="'+response._id +'"><a href="#" class="page-scroll dropdown-toggle" data-toggle="dropdown">'+response.firstName+'<span class="caret"></span></a><ul class="dropdown-menu" role="menu"><li><a id ="profileButton" href="/profile/'+response.firstName +'">Profile</a></li><li class="divider"></li><li><a id="logOut" href="">Log out</a></li></ul></li>')
 			$('#field1').html('<label>First Name<span class="req">*</span></label><input type="text" name="firstName" id="firstName" required autocomplete="off" />');
 			$('#field2').html('<label>Last Name<span class="req">*</span></label><input name ="lastName" id="lastName" type="text"required autocomplete="off"/>');
@@ -165,8 +165,7 @@ function pageLoad(){
 			$.post('/login',$('#loginForm').serialize(), function (response) {
 				console.log("the response is :" , response);
 				if ((response !== null)&& (response !=='wrong email') && (response !== 'password wrong')) {
-					$('#signButton').remove();
-					$('.signButton').remove();
+					$('.signButton').hide();
 					$('#ulNav').append('<li class="dropdown" id="'+response._id +'"><a href="#" class="page-scroll dropdown-toggle" data-toggle="dropdown">'+response.firstName+'<span class="caret"></span></a><ul class="dropdown-menu" role="menu"><li><a id ="profileButton" href="/profile/'+ response.firstName+'">Profile</a></li><li class="divider"></li><li><a id="logOut" >Log out</a></li></ul></li>')
 					disappearForm();
 					$('#field5').html('<label>Email Address<span class="req">*</span></label><input type="email" name ="email2" id= "email2" required autocomplete="off"/>');
@@ -198,14 +197,12 @@ function pageLoad(){
   					console.log("the response from the logout request :", response);
 	  				if (response === null) {
 		  				$('.dropdown').remove();
-		  				$('#ulNav').append('<li><a  class="page-scroll" id="signButton">Sign In</a></li>');
-		  				window.location.href = "/";
+		  				$('.signButton').show();
 	  				}
-  				}); 
-  				
-			}
-		);	
-
+  				});
+  				swal("Logged Out!", "Your are now logged out", "success"); 
+  				window.location.href = "/"; //it is not relocating to the /
+			});	
 	});
 
 	//clicking on the profile button in the home page
